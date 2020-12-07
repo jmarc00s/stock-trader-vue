@@ -5,9 +5,9 @@
         <strong>STOCK</strong>TRADER
       </v-toolbar-title>
       <v-toolbar-items>
-        <v-btn text to="/" exact> <strong> Início </strong></v-btn>
-        <v-btn text to="/portifolio"> <strong> Portifólio </strong></v-btn>
-        <v-btn text to="/acoes"> <strong> Ações </strong></v-btn>
+        <v-btn text to="/" exact>  Início </v-btn>
+        <v-btn text to="/portifolio"> Portifólio </v-btn>
+        <v-btn text to="/acoes"> Ações </v-btn>
       </v-toolbar-items>
       <v-spacer></v-spacer>
       <v-toolbar-items>

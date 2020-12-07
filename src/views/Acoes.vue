@@ -1,12 +1,15 @@
 <template>
   <div>
-      <h3> Acoes component works!</h3>
+    <ListaAcoes />
   </div>
 </template>
 
 <script>
+import ListaAcoes from '../components/Acoes/ListaAcoes'
 export default {
-
+  components: {
+    ListaAcoes
+  }
 }
 </script>
 

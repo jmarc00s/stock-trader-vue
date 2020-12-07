@@ -1,10 +1,18 @@
 <template>
-  <div id="app">
-    <Navbar />
-    <v-main>
-      <router-view/>
-    </v-main>
-  </div>
+  <v-app>
+    <v-content>
+      <Navbar />
+      <div class="px-16 py-8">
+        <transition
+          mode="out-in"
+          name="slide">
+
+          <router-view/>
+
+        </transition>
+      </div>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
@@ -25,9 +33,23 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
-
-.main{
-  padding: 12px;
+@keyframes slide-out {
+  from {transform: translateY(40px);}
+  to {transform: translateY(0);}
+}
+@keyframes slide-in {
+  from {transform: translateY(0px);}
+  to {transform: translateY(40px);}
 }
 
+.slide-enter-active {
+  animation: slide-in 0.3s ease-in-out;
+}
+.slide-leave-active {
+  animation: slide-out 0.3s ease-in-out;
+}
+
+.slide-enter, .slide-leave-to {
+  opacity: 0;
+}
 </style>
