@@ -34,19 +34,19 @@ export default {
   color: #2c3e50;
 }
 @keyframes slide-out {
-  from {transform: translateY(40px);}
+  from {transform: translateY(20px);}
   to {transform: translateY(0);}
 }
 @keyframes slide-in {
   from {transform: translateY(0px);}
-  to {transform: translateY(40px);}
+  to {transform: translateY(20px);}
 }
 
 .slide-enter-active {
-  animation: slide-in 0.3s ease-in-out;
+  animation: slide-in 0.3s ease-in;
 }
 .slide-leave-active {
-  animation: slide-out 0.3s ease-in-out;
+  animation: slide-out 0.3s ease-out;
 }
 
 .slide-enter, .slide-leave-to {

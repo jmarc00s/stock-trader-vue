@@ -1,12 +1,15 @@
 <template>
   <div>
-    <h3>Portifólio works!</h3>
+    <lista-acoes tipo="portifolio" />
   </div>
 </template>
 
 <script>
+import ListaAcoes from '../components/Acoes/ListaAcoes'
 export default {
-
+  components: {
+    ListaAcoes
+  }
 }
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ListaAcoes />
+    <ListaAcoes tipo="acao"/>
   </div>
 </template>
 
