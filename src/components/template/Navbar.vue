@@ -33,15 +33,14 @@
 
 <script>
 export default {
-  data () {
-    return {
-      saldo: this.$store.getters.obterSaldo
+  computed: {
+    saldo () {
+      return this.$store.getters.obterSaldo
     }
   },
   methods: {
     finalizarDia () {
       this.$store.dispatch('finalizarDia')
-      this.$store.dispatch('diminuirSaldo')
     },
     carregarDados () {
       this.$store.dispatch('obterAcoesIniciais')

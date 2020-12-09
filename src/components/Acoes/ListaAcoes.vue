@@ -15,15 +15,14 @@ export default {
     tipo: {
       required: true,
       type: String
+    },
+    acoes: {
+      required: true,
+      type: Array
     }
   },
   components: {
     CardAcao
-  },
-  data () {
-    return {
-      acoes: this.$store.getters.obterAcoes
-    }
   }
 }
 </script>

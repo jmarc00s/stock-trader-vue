@@ -6,7 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     saldo: 10000,
-    acoes: []
+    acoes: [],
+    acoesAdquiridas: []
   },
   mutations: {
     setarAcoes (state, payload) {
@@ -17,13 +18,24 @@ export default new Vuex.Store({
     alterarValorAcoesAleatoriamente (state) {
       state.acoes.map(acao => { acao.valor = Math.round(acao.valor * (1 + Math.random() - 0.42)) })
     },
-    diminuirSaldo (state) {
-      state.saldo -= 1000
+    diminuirSaldo (state, payload) {
+      state.saldo -= payload
+    },
+    aumentarSaldo (state, payload) {
+      state.saldo += payload
+    },
+    adicionarAcaoAdquirida (state, payload) {
+      state.acoesAdquiridas.push(payload)
+    },
+    removerQuantidadeAcao (state, payload) {
+
     }
+
   },
   getters: {
     obterAcoes: state => state.acoes,
-    obterSaldo: state => state.saldo
+    obterSaldo: state => state.saldo,
+    obterAcoesAdquiridas: state => state.acoesAdquiridas
   },
   actions: {
     obterAcoesIniciais ({ commit }) {
@@ -41,8 +53,15 @@ export default new Vuex.Store({
     carregarDados ({ commit }) {
 
     },
-    diminuirSaldo ({ commit }) {
-      commit('diminuirSaldo')
+    comprarAcao ({ commit }, payload) {
+      const valorADeduzir = payload.acao.valor * payload.quantidade
+      commit('adicionarAcaoAdquirida', payload)
+      commit('diminuirSaldo', valorADeduzir)
+    },
+    venderAcao ({ commit }, payload) {
+      const valorASomar = payload.acao.valor * payload.quantidade
+      commit('removerQuantidadeAcao', payload)
+      commit('aumentarSaldo', valorASomar)
     }
   },
   modules: {

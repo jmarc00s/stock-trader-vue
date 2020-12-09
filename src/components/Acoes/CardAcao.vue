@@ -10,11 +10,11 @@
             <v-text-field
               type="number"
               class="pr-2 flex-grow-1"
-              v-model="quantidade"
+              v-model.number="quantidade"
               label="Quantidade">
             </v-text-field>
-            <v-btn v-if="exibirBotaoVender">Vender</v-btn>
-            <v-btn v-else>Comprar</v-btn>
+            <v-btn v-if="exibirBotaoVender" @click="vender(acao.acao, acao.quantidade)">Vender</v-btn>
+            <v-btn v-else @click="comprar(acao, quantidade)" :disabled="desabilitarBotoes">Comprar</v-btn>
           </v-form>
         </v-row>
       </v-card-text>
@@ -34,10 +34,16 @@ export default {
   },
   computed: {
     titulo () {
-      return `${this.acao.nomeAcao.toUpperCase()} (Preço: R$ ${this.acao.valor})`
+      if (this.tipo === 'acao') {
+        return `${this.acao.nomeAcao.toUpperCase()} (Preço: R$ ${this.acao.valor})`
+      }
+      return `${this.acao.acao.nomeAcao.toUpperCase()} (Preço: R$ ${this.acao.acao.valor})`
     },
     exibirBotaoVender () {
       return this.tipo === 'portifolio'
+    },
+    desabilitarBotoes () {
+      return this.quantidade <= 0
     }
   },
   created () {
@@ -45,8 +51,8 @@ export default {
   },
   data () {
     return {
-      quantidade: 0,
-      classeTitulo: ''
+      classeTitulo: '',
+      quantidade: this.acao.quantidade ?? 0
     }
   },
   methods: {
@@ -59,6 +65,13 @@ export default {
         default:
           return ''
       }
+    },
+    comprar (acao, quantidade) {
+      this.$store.dispatch('comprarAcao', { acao, quantidade })
+      this.quantidade = 0
+    },
+    vender (acao, quantidade) {
+      this.$store.dispatch('venderAcao', { acao, quantidade })
     }
   }
 

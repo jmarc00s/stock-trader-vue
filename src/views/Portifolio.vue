@@ -1,6 +1,6 @@
 <template>
   <div>
-    <lista-acoes tipo="portifolio" />
+    <lista-acoes tipo="portifolio" :acoes="acoes" />
   </div>
 </template>
 
@@ -9,6 +9,11 @@ import ListaAcoes from '../components/Acoes/ListaAcoes'
 export default {
   components: {
     ListaAcoes
+  },
+  computed: {
+    acoes () {
+      return this.$store.getters.obterAcoesAdquiridas
+    }
   }
 }
 </script>
