@@ -21,6 +21,9 @@ import Navbar from './components/template/Navbar.vue'
 export default {
   components: {
     Navbar
+  },
+  mounted () {
+    this.$store.dispatch('obterAcoesIniciais')
   }
 }
 </script>

@@ -17,7 +17,7 @@
 export default {
   data () {
     return {
-      saldo: 10000
+      saldo: this.$store.getters.obterSaldo
     }
   }
 }

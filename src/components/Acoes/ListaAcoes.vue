@@ -22,12 +22,7 @@ export default {
   },
   data () {
     return {
-      acoes: [
-        { nomeAcao: 'Google', valor: 150, quantidadeDisponivel: 100 },
-        { nomeAcao: 'BMW', valor: 150, quantidadeDisponivel: 45 },
-        { nomeAcao: 'Magazine Luiza', valor: 200, quantidadeDisponivel: 23 },
-        { nomeAcao: 'Twitter', valor: 400, quantidadeDisponivel: 23 }
-      ]
+      acoes: this.$store.getters.obterAcoes
     }
   }
 }

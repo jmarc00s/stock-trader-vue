@@ -11,8 +11,20 @@
       </v-toolbar-items>
       <v-spacer></v-spacer>
       <v-toolbar-items>
-        <v-btn text><strong>Finalizar dia</strong></v-btn>
-        <v-btn text><strong>Salvar & carregar</strong></v-btn>
+        <v-btn text @click="finalizarDia"><strong>Finalizar dia</strong></v-btn>
+        <v-menu bottom offset-y transition="slide-y-transition">
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn text v-on="on" v-bind="attrs"><strong>Salvar & carregar</strong></v-btn>
+          </template>
+          <v-list>
+            <v-list-item>
+              <v-list-item-title>Salvar dados</v-list-item-title>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-title @click="carregarDados">Carregar dados</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
         <label style="padding-top: 24px"> Saldo: {{saldo | paraReais }}</label>
       </v-toolbar-items>
     </v-toolbar>
@@ -23,7 +35,16 @@
 export default {
   data () {
     return {
-      saldo: 10000
+      saldo: this.$store.getters.obterSaldo
+    }
+  },
+  methods: {
+    finalizarDia () {
+      this.$store.dispatch('finalizarDia')
+      this.$store.dispatch('diminuirSaldo')
+    },
+    carregarDados () {
+      this.$store.dispatch('obterAcoesIniciais')
     }
   }
 }
