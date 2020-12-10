@@ -6,14 +6,15 @@
       </v-card-title>
       <v-card-text class="pa-6">
         <v-row justify="space-between">
-          <v-form ref="form" class="d-flex flex-row align-center flex-grow-1">
+          <v-form v-model="valid" ref="form" class="d-flex flex-row align-center flex-grow-1">
             <v-text-field
+              :rules="quantidadeRules"
               type="number"
               class="pr-2 flex-grow-1"
               v-model.number="quantidade"
               label="Quantidade">
             </v-text-field>
-            <v-btn v-if="exibirBotaoVender" @click="vender(acao.acao, acao.quantidade)">Vender</v-btn>
+            <v-btn v-if="exibirBotaoVender" :disabled="desabilitarBotoes" @click="vender(acao.acao, quantidade)">Vender</v-btn>
             <v-btn v-else @click="comprar(acao, quantidade)" :disabled="desabilitarBotoes">Comprar</v-btn>
           </v-form>
         </v-row>
@@ -43,7 +44,12 @@ export default {
       return this.tipo === 'portifolio'
     },
     desabilitarBotoes () {
-      return this.quantidade <= 0
+      return this.quantidade <= 0 || !this.valid
+    },
+    quantidadeRules () {
+      if (this.tipo === 'acao') return [v => (this.tipo === 'acao' && v <= this.acao.quantidadeDisponivel) || 'Quantidade indisponível']
+
+      return [v => (this.tipo === 'portifolio' && v <= this.acao.quantidade) || 'Quantidade indisponível']
     }
   },
   created () {
@@ -51,6 +57,7 @@ export default {
   },
   data () {
     return {
+      valid: true,
       classeTitulo: '',
       quantidade: this.acao.quantidade ?? 0
     }

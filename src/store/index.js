@@ -28,9 +28,18 @@ export default new Vuex.Store({
       state.acoesAdquiridas.push(payload)
     },
     removerQuantidadeAcao (state, payload) {
+      const acaoARemover = state.acoesAdquiridas.filter(acao => acao.acao.id === payload.acao.id)[0]
 
+      const index = state.acoesAdquiridas.indexOf(acaoARemover)
+
+      const acao = state.acoesAdquiridas[index]
+
+      acao.quantidade -= payload.quantidade
+
+      if (acao.quantidade <= 0) {
+        state.acoesAdquiridas.splice(index, 1)
+      }
     }
-
   },
   getters: {
     obterAcoes: state => state.acoes,
