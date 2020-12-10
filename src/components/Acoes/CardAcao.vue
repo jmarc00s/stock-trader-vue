@@ -47,8 +47,12 @@ export default {
       return this.quantidade <= 0 || !this.valid
     },
     quantidadeRules () {
-      if (this.tipo === 'acao') return [v => (this.tipo === 'acao' && v <= this.acao.quantidadeDisponivel) || 'Quantidade indisponível']
-
+      if (this.tipo === 'acao') {
+        return [
+          v => (this.tipo === 'acao' && v <= this.acao.quantidadeDisponivel) || 'Quantidade indisponível',
+          v => (this.tipo === 'acao' && this._validarSaldo(this.acao.valor, v)) || 'Saldo indisponível'
+        ]
+      }
       return [v => (this.tipo === 'portifolio' && v <= this.acao.quantidade) || 'Quantidade indisponível']
     }
   },
@@ -79,6 +83,11 @@ export default {
     },
     vender (acao, quantidade) {
       this.$store.dispatch('venderAcao', { acao, quantidade })
+    },
+    _validarSaldo (valorAcao, quantidade) {
+      if (!quantidade) return true
+      const saldo = this.$store.getters.obterSaldo
+      return saldo > valorAcao * quantidade
     }
   }
 
