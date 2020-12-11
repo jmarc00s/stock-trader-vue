@@ -1,7 +1,7 @@
 <template>
   <v-app>
+    <Navbar />
     <v-content>
-      <Navbar />
       <div class="px-16 py-8">
         <transition
           mode="out-in"

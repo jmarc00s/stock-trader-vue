@@ -44,7 +44,7 @@ export default {
       return this.tipo === 'portifolio'
     },
     desabilitarBotoes () {
-      return this.quantidade <= 0 || !this.valid
+      return this.quantidade <= 0 || !this.valid || !Number.isInteger(this.quantidade)
     },
     quantidadeRules () {
       if (this.tipo === 'acao') {

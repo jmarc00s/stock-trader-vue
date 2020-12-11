@@ -1,5 +1,5 @@
 
-const Acoes = {
+export default {
   state: {
     acoes: []
   },
@@ -22,5 +22,3 @@ const Acoes = {
     }
   }
 }
-
-export default Acoes

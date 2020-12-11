@@ -1,4 +1,4 @@
-const Portifolio = {
+export default {
   state: {
     saldo: 10000,
     acoesAdquiridas: []
@@ -45,5 +45,3 @@ const Portifolio = {
   }
 
 }
-
-export default Portifolio

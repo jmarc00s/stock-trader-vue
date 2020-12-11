@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex flex-row">
     <v-row no-gutters>
-      <v-col cols="12" sm="4" v-for="acao in acoes" :key="acao.nomeAcao">
+      <v-col cols="12" sm="4" v-for="acao in acoes" :key="acao.id">
         <CardAcao class="px-4 pb-2" :acao="acao" :tipo="tipo" />
       </v-col>
     </v-row>
